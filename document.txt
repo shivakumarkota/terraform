@@ -1,0 +1,42 @@
+This code is a Python script designed to automate the process of creating virtual machines (VMs) on AWS and Azure cloud platforms using Terraform. It does this by setting the necessary environment variables for authentication and defining functions to create the resources based on user input.
+Breakdown of the Code:
+1.	Setting Environment Variables: The script sets environment variables for AWS and Azure authentication using the os.environ method. This includes setting the AWS access key ID, secret access key, and Azure subscription ID, client ID, client secret, and tenant ID.
+2.	Function to Create AWS EC2 Instances: The create_ec2_instance(instance_type) function maps the user input (instance type) to the corresponding Terraform resource name. It then runs a Terraform command to create the specified AWS instance using subprocess.run.
+3.	Function to Create Azure Virtual Machines: Similar to the AWS function, the create_azure_vm(vm_type) function maps the user input (VM type) to the corresponding Terraform resource name. It then runs a Terraform command to create the specified Azure VM using subprocess.run.
+4.	Main Program Logic:
+o	The script prompts the user to select a cloud provider (AWS or Azure).
+o	Based on the user's choice, it prompts them to select a server or VM type (large, medium, or small).
+o	The script then calls the appropriate function (create_ec2_instance or create_azure_vm) with the specified instance or VM type.
+o	If the user makes an invalid selection, the script prints an error message.
+Detailed Steps:
+1.	Setting Environment Variables:
+python
+Copy code
+os.environ["AWS_ACCESS_KEY_ID"] = "####"
+os.environ["AWS_SECRET_ACCESS_KEY"] = "#############"
+os.environ["ARM_SUBSCRIPTION_ID"] = ""
+os.environ["ARM_CLIENT_ID"] = ""
+os.environ["ARM_CLIENT_SECRET"] = ""
+os.environ["ARM_TENANT_ID"] = ""
+These lines set the necessary environment variables for authenticating with AWS and Azure.
+2.	Function Definitions:
+o	create_ec2_instance(instance_type): Maps instance types to Terraform resource names and runs a Terraform command to create an AWS EC2 instance.
+o	create_azure_vm(vm_type): Maps VM types to Terraform resource names and runs a Terraform command to create an Azure VM.
+3.	Main Program Execution:
+python
+Copy code
+if __name__ == "__main__":
+    print("Select a cloud provider:")
+    print("1. AWS")
+    print("2. Azure")
+
+    provider_choice = input("Enter the number of the cloud provider: ").strip()
+    ...
+This section handles user input for selecting a cloud provider and server/VM type, and calls the appropriate function to create the resource.
+User Interaction:
+1.	The user is prompted to select a cloud provider (AWS or Azure).
+2.	Depending on the selection, the user is then prompted to choose the type of server or VM they want to create.
+3.	The script then uses Terraform to create the selected resource on the specified cloud provider.
+Error Handling:
+The script includes checks for invalid selections and prints appropriate error messages if the user inputs an invalid option.
+
